@@ -88,7 +88,7 @@ io.on('connection', (socket: socketIO.Socket) => {
 	logger.info("Total connected: %d", connectionCount);
 	let code: string | null = null;
 	
-	console.log('New connection from ' + socket.handshake.address.address + ':' + socket.handshake.address.port);	
+	console.log('New connection from ' + socket.handshake.address);	
 
 	socket.on('join', (c: string, id: number, clientId: number) => {
 		if (typeof c !== 'string' || typeof id !== 'number' || typeof clientId !== 'number') {
