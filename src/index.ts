@@ -133,6 +133,7 @@ io.on('connection', (socket: socketIO.Socket) => {
 			playerId: id,
 			clientId: clientId === Math.pow(2, 32) - 1 ? null : clientId
 		};
+		logger.info("Connected PlayerID: %id | ClientID: %clientId");
 		clients.set(socket.id, client);
 		socket.to(code).broadcast.emit('setClient', socket.id, client);
 	})
