@@ -87,6 +87,8 @@ io.on('connection', (socket: socketIO.Socket) => {
 	connectionCount++;
 	logger.info("Total connected: %d", connectionCount);
 	let code: string | null = null;
+	
+	console.log('New connection from ' + socket.handshake.address.address + ':' + socket.handshake.address.port);	
 
 	socket.on('join', (c: string, id: number, clientId: number) => {
 		if (typeof c !== 'string' || typeof id !== 'number' || typeof clientId !== 'number') {
@@ -133,7 +135,6 @@ io.on('connection', (socket: socketIO.Socket) => {
 			playerId: id,
 			clientId: clientId === Math.pow(2, 32) - 1 ? null : clientId
 		};
-		logger.info("Connected PlayerID: %id | ClientID: %clientId", id, clientId);
 		clients.set(socket.id, client);
 		socket.to(code).broadcast.emit('setClient', socket.id, client);
 	})
