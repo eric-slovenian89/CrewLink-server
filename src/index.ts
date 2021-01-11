@@ -7,7 +7,7 @@ import socketIO from 'socket.io';
 import Tracer from 'tracer';
 import morgan from 'morgan';
 
-const supportedCrewLinkVersions = new Set(['1.2.0', '1.2.1']);
+const supportedCrewLinkVersions = new Set(['2.0.0', '2.0.1']);
 const httpsEnabled = !!process.env.HTTPS;
 
 const port = process.env.PORT || (httpsEnabled ? '443' : '9736');
@@ -87,8 +87,6 @@ io.on('connection', (socket: socketIO.Socket) => {
 	connectionCount++;
 	logger.info("Total connected: %d", connectionCount);
 	let code: string | null = null;
-	
-	console.log('New connection from ' + socket.handshake.address);	
 
 	socket.on('join', (c: string, id: number, clientId: number) => {
 		if (typeof c !== 'string' || typeof id !== 'number' || typeof clientId !== 'number') {
